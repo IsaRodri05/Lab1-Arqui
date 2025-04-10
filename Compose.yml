@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    build: sql/.
+    container_name: sqlserver_container
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    restart: unless-stopped
+
+volumes:
+  sql_data:
