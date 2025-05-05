@@ -6,7 +6,7 @@ services:
       - "8888:1433"
     environment:
       ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Papitas123*"
+      SA_PASSWORD: "Lab12345"
     volumes:
       - sql_data:/var/opt/mssql
     restart: unless-stopped
