@@ -1,5 +1,6 @@
 .vs/
 obj/
+bin/
 *.nuget.*
 project.assets.json
 project.nuget.cache
