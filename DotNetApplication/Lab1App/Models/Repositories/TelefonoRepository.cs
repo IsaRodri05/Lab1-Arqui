@@ -4,9 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lab1App.Models.Repositories
 {
-    public class TelefonoRepository: ITelefono
+    public class TelefonoRepository : ITelefono
     {
         private readonly ArqPerDbContext _context;
+
         public TelefonoRepository(ArqPerDbContext context)
         {
             _context = context;
@@ -14,12 +15,16 @@ namespace Lab1App.Models.Repositories
 
         public async Task<List<Telefono>> GetAllTelefonosAsync()
         {
-            return await _context.Telefonos.ToListAsync();
+            return await _context.Telefonos
+                                 .Include(t => t.DuenioNavigation)
+                                 .ToListAsync();
         }
 
-        public async Task<Telefono?> GetByIdAsync(int idTel)
+        public async Task<Telefono?> GetByIdAsync(string num)
         {
-            return await _context.Telefonos.FindAsync(idTel);
+            return await _context.Telefonos
+                                 .Include(t => t.DuenioNavigation)
+                                 .FirstOrDefaultAsync(t => t.Num == num);
         }
 
         public async Task AddAsync(Telefono telefono)
@@ -34,9 +39,9 @@ namespace Lab1App.Models.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int idTel)
+        public async Task DeleteAsync(string num)
         {
-            var telefono = await GetByIdAsync(idTel);
+            var telefono = await GetByIdAsync(num);
             if (telefono != null)
             {
                 _context.Telefonos.Remove(telefono);

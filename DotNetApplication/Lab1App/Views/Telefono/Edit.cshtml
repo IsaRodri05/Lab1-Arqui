@@ -1,0 +1,43 @@
+﻿@model Lab1App.Models.Entities.Telefono
+@{
+    ViewData["Title"] = "Editar Teléfono";
+}
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+{
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+}
+
+<form asp-action="Edit" method="post">
+    <!-- Campo oculto con el número original -->
+    <input type="hidden" name="originalNum" value="@Model.Num" />
+
+    <div class="form-group">
+        <label asp-for="Num" class="control-label">Número</label>
+        <input asp-for="Num" class="form-control" />
+        <span asp-validation-for="Num" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Oper" class="control-label">Operador</label>
+        <input asp-for="Oper" class="form-control" />
+        <span asp-validation-for="Oper" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duenio" class="control-label">Dueño</label>
+        <select asp-for="Duenio" class="form-control" asp-items="ViewBag.Personas">
+            <option value="">Seleccione un dueño</option>
+        </select>
+        <span asp-validation-for="Duenio" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

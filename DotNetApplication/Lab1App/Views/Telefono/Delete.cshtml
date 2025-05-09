@@ -1,0 +1,33 @@
+﻿@model Lab1App.Models.Entities.Telefono
+@{
+    ViewData["Title"] = "Eliminar Teléfono";
+}
+
+<h2>¿Está seguro que desea eliminar este teléfono?</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div>
+    <h4>Teléfono</h4>
+    <dl class="row">
+        <dt class="col-sm-2">Número</dt>
+        <dd class="col-sm-10">@Model.Num</dd>
+
+        <dt class="col-sm-2">Operador</dt>
+        <dd class="col-sm-10">@Model.Oper</dd>
+
+        <dt class="col-sm-2">Dueño</dt>
+        <dd class="col-sm-10">@Model.DuenioNavigation?.Nombre @Model.DuenioNavigation?.Apellido</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Num" />
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>

@@ -1,0 +1,43 @@
+﻿@model List<Lab1App.Models.Entities.Telefono>
+
+@{
+    ViewData["Title"] = "Lista de Teléfonos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Operador</th>
+            <th>Dueño</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tel in Model)
+        {
+            <tr>
+                <td>@tel.Num</td>
+                <td>@tel.Oper</td>
+                <td>
+                    @if (tel.DuenioNavigation != null)
+                    {
+                        <span>@tel.DuenioNavigation.Nombre @tel.DuenioNavigation.Apellido (Cc: @tel.DuenioNavigation.Cc)</span>
+                    }
+                    else
+                    {
+                        <span>Sin dueño</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-num="@tel.Num">Editar</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-num="@tel.Num">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-action="Create">Agregar Teléfono</a>

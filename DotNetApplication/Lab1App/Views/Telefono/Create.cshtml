@@ -1,0 +1,51 @@
+﻿@model Lab1App.Models.Entities.Telefono
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Agregar Teléfono";
+    var personas = ViewBag.Personas as List<SelectListItem>;
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+    <div class="form-group">
+        <label asp-for="Num" class="control-label">Número</label>
+        <input asp-for="Num" class="form-control" />
+        <span asp-validation-for="Num" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Oper" class="control-label">Operador</label>
+        <input asp-for="Oper" class="form-control" />
+        <span asp-validation-for="Oper" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duenio" class="control-label">Dueño</label>
+        <select asp-for="Duenio" class="form-control" asp-items="personas">
+            <option value="">Seleccione un dueño</option>
+        </select>
+        <span asp-validation-for="Duenio" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
