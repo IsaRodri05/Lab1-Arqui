@@ -1,0 +1,24 @@
+﻿@model Lab1App.Models.Entities.Persona
+
+@{
+    ViewData["Title"] = "Eliminar Persona";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>¿Estás seguro de que deseas eliminar a la persona con CC: @Model.Cc?</h3>
+
+<div>
+    <h4>Nombre: @Model.Nombre</h4>
+    <h4>Apellido: @Model.Apellido</h4>
+    <h4>Género: @Model.Genero</h4>
+    <h4>Edad: @Model.Edad</h4>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Cc" />
+    <div class="form-group mt-3">
+        <input type="submit" value="Confirmar eliminación" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>

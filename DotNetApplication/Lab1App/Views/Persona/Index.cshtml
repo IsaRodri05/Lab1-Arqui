@@ -1,0 +1,38 @@
+﻿@model List<Lab1App.Models.Entities.Persona>
+
+@{
+    ViewData["Title"] = "Lista de Personas";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>CC</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Género</th>
+            <th>Edad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var persona in Model)
+        {
+            <tr>
+                <td>@persona.Cc</td>
+                <td>@persona.Nombre</td>
+                <td>@persona.Apellido</td>
+                <td>@persona.Genero</td>
+                <td>@persona.Edad</td>
+                <td>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-cc="@persona.Cc">Editar</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-cc="@persona.Cc">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-action="Create">Agregar Persona</a>
