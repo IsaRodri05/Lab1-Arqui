@@ -8,6 +8,12 @@ GO
 USE arq_per_db;
 GO
 
+-- Drop table
+--drop table telefono;
+--drop table estudios;
+--drop table profesion;
+--drop table persona;
+
 -- Tabla persona
 IF OBJECT_ID('persona', 'U') IS NOT NULL DROP TABLE persona;
 CREATE TABLE persona (
@@ -22,7 +28,7 @@ GO
 -- Tabla profesion
 IF OBJECT_ID('profesion', 'U') IS NOT NULL DROP TABLE profesion;
 CREATE TABLE profesion (
-    id INT NOT NULL PRIMARY KEY,
+    id INT NOT NULL PRIMARY KEY IDENTITY(1,1),  -- Cambiado para que sea autoincremental
     nom VARCHAR(90) NOT NULL,
     des TEXT NULL
 );
@@ -36,8 +42,8 @@ CREATE TABLE estudios (
     fecha DATE NULL,
     univer VARCHAR(50) NULL,
     PRIMARY KEY (id_prof, cc_per),
-    FOREIGN KEY (id_prof) REFERENCES profesion(id),
-    FOREIGN KEY (cc_per) REFERENCES persona(cc)
+    FOREIGN KEY (id_prof) REFERENCES profesion(id) ON DELETE CASCADE,  -- Eliminación en cascada
+    FOREIGN KEY (cc_per) REFERENCES persona(cc) ON DELETE CASCADE  -- Eliminación en cascada
 );
 GO
 
@@ -47,6 +53,6 @@ CREATE TABLE telefono (
     num VARCHAR(15) NOT NULL PRIMARY KEY,
     oper VARCHAR(45) NOT NULL,
     duenio INT NOT NULL,
-    FOREIGN KEY (duenio) REFERENCES persona(cc)
+    FOREIGN KEY (duenio) REFERENCES persona(cc) ON DELETE CASCADE  -- Eliminación en cascada
 );
 GO
