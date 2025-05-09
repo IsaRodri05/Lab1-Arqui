@@ -3,6 +3,8 @@
     ViewData["Title"] = "Editar Teléfono";
 }
 
+<h2>@ViewData["Title"]</h2>
+
 @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
 {
     <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
@@ -13,27 +15,29 @@
     <input type="hidden" name="originalNum" value="@Model.Num" />
 
     <div class="form-group">
-        <label asp-for="Num" class="control-label">Número</label>
+        <label asp-for="Num" class="control-label"></label>
         <input asp-for="Num" class="form-control" />
         <span asp-validation-for="Num" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Oper" class="control-label">Operador</label>
+        <label asp-for="Oper" class="control-label"></label>
         <input asp-for="Oper" class="form-control" />
         <span asp-validation-for="Oper" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Duenio" class="control-label">Dueño</label>
+        <label asp-for="Duenio" class="control-label"></label>
         <select asp-for="Duenio" class="form-control" asp-items="ViewBag.Personas">
             <option value="">Seleccione un dueño</option>
         </select>
         <span asp-validation-for="Duenio" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    <div class="form-group mt-3">
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
 </form>
 
 @section Scripts {

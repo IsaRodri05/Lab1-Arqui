@@ -6,8 +6,6 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<h4>Persona</h4>
-<hr />
 
 <form asp-action="Edit">
     <div class="form-group">
@@ -31,9 +29,8 @@
     <div class="form-group mb-3">
         <label asp-for="Genero" class="control-label"></label>
         <select asp-for="Genero" class="form-select">
-            <option value="F" selected="@Model.Genero == " F"">Femenino</option>
-            <option value="M" selected="@Model.Genero == " M"">Masculino</option>
-            <option value="N" selected="@Model.Genero == " N"">Prefiero no decirlo</option>
+            <option value="F" selected="@Model.Genero == "F">Femenino</option>
+            <option value="M" selected="@Model.Genero == "M">Masculino</option>
         </select>
         <span asp-validation-for="Genero" class="text-danger"></span>
     </div>

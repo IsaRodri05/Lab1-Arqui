@@ -13,8 +13,21 @@
             <input type="hidden" name="idProfOriginal" value="@ViewBag.IdProfOriginal" />
             <input type="hidden" name="ccPerOriginal" value="@ViewBag.CcPerOriginal" />
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!-- Resumen de validación -->
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
+            }
 
+
+            <!-- Campo de Persona -->
             <div class="form-group mb-3">
                 <label asp-for="CcPer" class="control-label">Persona *</label>
                 <select asp-for="CcPer" class="form-control" asp-items="ViewBag.Personas" required>
@@ -23,6 +36,7 @@
                 <span asp-validation-for="CcPer" class="text-danger"></span>
             </div>
 
+            <!-- Campo de Profesión -->
             <div class="form-group mb-3">
                 <label asp-for="IdProf" class="control-label">Profesión *</label>
                 <select asp-for="IdProf" class="form-control" asp-items="ViewBag.Profesiones" required>
@@ -31,18 +45,21 @@
                 <span asp-validation-for="IdProf" class="text-danger"></span>
             </div>
 
+            <!-- Campo de Fecha -->
             <div class="form-group mb-3">
                 <label asp-for="Fecha" class="control-label">Fecha</label>
                 <input asp-for="Fecha" class="form-control" type="date" />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
 
+            <!-- Campo de Universidad -->
             <div class="form-group mb-3">
                 <label asp-for="Univer" class="control-label">Universidad</label>
                 <input asp-for="Univer" class="form-control" />
                 <span asp-validation-for="Univer" class="text-danger"></span>
             </div>
 
+            <!-- Botones de acción -->
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                 <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
@@ -56,3 +73,4 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+

@@ -7,6 +7,20 @@
 <h1>@ViewData["Title"]</h1>
 
 <form asp-action="Create" method="post">
+    <!-- Mostrar errores generales si existen -->
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+
     <div class="form-group mb-3">
         <label asp-for="Cc" class="control-label"></label>
         <input asp-for="Cc" class="form-control" />
@@ -28,7 +42,6 @@
         <select asp-for="Genero" class="form-select">
             <option value="F">Femenino</option>
             <option value="M">Masculino</option>
-            <option value="N">Prefiero no decirlo</option>
         </select>
         <span asp-validation-for="Genero" class="text-danger"></span>
     </div>

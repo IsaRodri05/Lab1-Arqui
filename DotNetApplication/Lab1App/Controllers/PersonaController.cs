@@ -1,6 +1,5 @@
 ﻿using Lab1App.Models.Entities;
 using Lab1App.Models.Interfaces;
-using Lab1App.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Lab1App.Controllers
@@ -32,11 +31,20 @@ namespace Lab1App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Persona persona)
         {
+            // Verifica si la cédula ya existe
+            var existingPersona = await _personaRepository.GetByIdAsync(persona.Cc);
+            if (existingPersona != null)
+            {
+                ModelState.AddModelError("Cc", "Ya existe una persona con esta cédula.");
+            }
+
             if (ModelState.IsValid)
             {
                 await _personaRepository.AddAsync(persona);
                 return RedirectToAction(nameof(Index));
             }
+
+            // Si llega aquí, significa que algo falló
             return View(persona);
         }
 

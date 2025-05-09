@@ -55,14 +55,16 @@ namespace Lab1App.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                // Verificar si ya existe la combinación
+                var existente = await _estudioRepository.GetByIdsAsync(estudio.IdProf, estudio.CcPer);
+                if (existente != null)
+                {
+                    ModelState.AddModelError("", "Ya existe un estudio con esta Persona y Profesión.");
+                }
+                else
                 {
                     await _estudioRepository.AddAsync(estudio);
                     return RedirectToAction(nameof(Index));
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "Error al guardar el estudio: " + ex.Message);
                 }
             }
 
@@ -83,6 +85,7 @@ namespace Lab1App.Controllers
 
             return View(estudio);
         }
+
 
         // GET: /Estudio/Edit/5/5
         public async Task<IActionResult> Edit(int idProf, int ccPer)
