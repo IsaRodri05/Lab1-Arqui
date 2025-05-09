@@ -11,27 +11,47 @@
 
 <form asp-action="Edit">
     <div class="form-group">
-        <label for="Cc">CC</label>
-        <input type="text" class="form-control" id="Cc" name="Cc" value="@Model.Cc" readonly />
+        <label asp-for="Cc" class="control-label"></label>
+        <input asp-for="Cc" class="form-control" readonly />
+        <span asp-validation-for="Cc" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label for="Nombre">Nombre</label>
-        <input type="text" class="form-control" id="Nombre" name="Nombre" value="@Model.Nombre" required />
+        <label asp-for="Nombre" class="control-label"></label>
+        <input asp-for="Nombre" class="form-control" required />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label for="Apellido">Apellido</label>
-        <input type="text" class="form-control" id="Apellido" name="Apellido" value="@Model.Apellido" required />
+        <label asp-for="Apellido" class="control-label"></label>
+        <input asp-for="Apellido" class="form-control" required />
+        <span asp-validation-for="Apellido" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <label for="Genero">Género</label>
-        <input type="text" class="form-control" id="Genero" name="Genero" value="@Model.Genero" required />
+
+    <div class="form-group mb-3">
+        <label asp-for="Genero" class="control-label"></label>
+        <select asp-for="Genero" class="form-select">
+            <option value="F" selected="@Model.Genero == " F"">Femenino</option>
+            <option value="M" selected="@Model.Genero == " M"">Masculino</option>
+            <option value="N" selected="@Model.Genero == " N"">Prefiero no decirlo</option>
+        </select>
+        <span asp-validation-for="Genero" class="text-danger"></span>
     </div>
+
     <div class="form-group">
-        <label for="Edad">Edad</label>
-        <input type="number" class="form-control" id="Edad" name="Edad" value="@Model.Edad" required />
+        <label asp-for="Edad" class="control-label"></label>
+        <input asp-for="Edad" class="form-control" type="number" required />
+        <span asp-validation-for="Edad" class="text-danger"></span>
     </div>
-    <div class="form-group">
+
+    <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary">Guardar cambios</button>
         <a class="btn btn-secondary" href="@Url.Action("Index")">Cancelar</a>
     </div>
 </form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
