@@ -1,0 +1,24 @@
+﻿@model Lab1App.Models.Entities.Profesion
+
+@{
+    ViewData["Title"] = "Eliminar Profesión";
+}
+
+<h1>Eliminar Profesión</h1>
+
+<h4>¿Estás seguro que deseas eliminar esta profesión?</h4>
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-2">Nombre</dt>
+    <dd class="col-sm-10">@Model.Nom</dd>
+
+    <dt class="col-sm-2">Descripción</dt>
+    <dd class="col-sm-10">@Model.Des</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

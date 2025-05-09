@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Lab1App.Models.Entities.Estudio>
+@{
+    ViewData["Title"] = "Estudios";
+}
+
+<h1>Lista de Estudios</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Agregar Estudio</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Profesión</th>
+            <th>Persona</th>
+            <th>Fecha</th>
+            <th>Universidad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estudio in Model)
+        {
+            <tr>
+                <td>@estudio.IdProfNavigation?.Nom</td>
+                <td>@estudio.CcPerNavigation?.Nombre @estudio.CcPerNavigation?.Apellido (@estudio.CcPer)</td>
+                <td>@(estudio.Fecha?.ToString("dd/MM/yyyy") ?? "Sin fecha")</td>
+                <td>@estudio.Univer</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@estudio.IdProf" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@estudio.IdProf" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

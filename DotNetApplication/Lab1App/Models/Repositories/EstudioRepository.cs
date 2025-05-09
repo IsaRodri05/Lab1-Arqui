@@ -12,15 +12,24 @@ namespace Lab1App.Models.Repositories
             _context = context;
         }
 
+
         public async Task<List<Estudio>> GetAllEstudiosAsync()
         {
-            return await _context.Estudios.ToListAsync();
+            return await _context.Estudios
+                .Include(e => e.IdProfNavigation)
+                .Include(e => e.CcPerNavigation)
+                .ToListAsync();
         }
+
 
         public async Task<Estudio?> GetByIdAsync(int idProf)
         {
-            return await _context.Estudios.FindAsync(idProf);
+            return await _context.Estudios
+                .Include(e => e.IdProfNavigation)
+                .Include(e => e.CcPerNavigation)
+                .FirstOrDefaultAsync(e => e.IdProf == idProf);
         }
+
 
         public async Task AddAsync(Estudio estudio)
         {

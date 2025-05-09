@@ -1,0 +1,30 @@
+﻿@model Lab1App.Models.Entities.Profesion
+
+@{
+    ViewData["Title"] = "Editar Profesión";
+}
+
+<h1>Editar Profesión</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Nom" class="form-label">Nombre</label>
+        <input asp-for="Nom" class="form-control" />
+        <span asp-validation-for="Nom" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Des" class="form-label">Descripción</label>
+        <input asp-for="Des" class="form-control" />
+        <span asp-validation-for="Des" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
