@@ -86,7 +86,7 @@ public partial class ArqPerDbContext : DbContext
             entity.ToTable("profesion");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd() // Genera ID automaticamente
                 .HasColumnName("id");
             entity.Property(e => e.Des)
                 .HasColumnType("text")

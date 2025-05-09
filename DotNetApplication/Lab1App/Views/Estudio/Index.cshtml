@@ -28,8 +28,14 @@
                 <td>@(estudio.Fecha?.ToString("dd/MM/yyyy") ?? "Sin fecha")</td>
                 <td>@estudio.Univer</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@estudio.IdProf" class="btn btn-warning btn-sm">Editar</a>
-                    <a asp-action="Delete" asp-route-id="@estudio.IdProf" class="btn btn-danger btn-sm">Eliminar</a>
+                    <a asp-action="Edit"
+                       asp-route-idProf="@estudio.IdProf"
+                       asp-route-ccPer="@estudio.CcPer"
+                       class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete"
+                       asp-route-idProf="@estudio.IdProf"
+                       asp-route-ccPer="@estudio.CcPer"
+                       class="btn btn-danger btn-sm">Eliminar</a>
                 </td>
             </tr>
         }

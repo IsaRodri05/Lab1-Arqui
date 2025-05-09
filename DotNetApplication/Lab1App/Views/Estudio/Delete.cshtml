@@ -1,0 +1,26 @@
+﻿@model Lab1App.Models.Entities.Estudio
+
+@{
+    ViewData["Title"] = "Eliminar Estudio";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h3>¿Estás seguro de que deseas eliminar este estudio?</h3>
+
+<div>
+    <h4>Profesión: @Model.IdProfNavigation?.Nom</h4>
+    <h4>Persona: @Model.CcPerNavigation?.Nombre @Model.CcPerNavigation?.Apellido (CC: @Model.CcPer)</h4>
+    <h4>Fecha: @Model.Fecha?.ToString("yyyy-MM-dd")</h4>
+    <h4>Universidad: @Model.Univer</h4>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" name="idProf" value="@Model.IdProf" />
+    <input type="hidden" name="ccPer" value="@Model.CcPer" />
+
+    <div class="form-group mt-3">
+        <input type="submit" value="Confirmar eliminación" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>

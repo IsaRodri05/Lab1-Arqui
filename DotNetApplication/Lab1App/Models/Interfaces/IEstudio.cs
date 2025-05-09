@@ -4,10 +4,10 @@ namespace Lab1App.Models.Interfaces
     public interface IEstudio
     {
         Task<List<Estudio>> GetAllEstudiosAsync();
-        Task<Estudio?> GetByIdAsync(int IdProf);
+        Task<Estudio?> GetByIdsAsync(int idProf, int ccPer);
         Task AddAsync(Estudio estudio);
         Task UpdateAsync(Estudio estudio);
-        Task DeleteAsync(int IdProf);
-
+        Task DeleteAsync(int idProf, int ccPer);
     }
+
 }
